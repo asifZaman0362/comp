@@ -4,6 +4,9 @@
 
 #include "option.hpp"
 #include "result.hpp"
+#define LOGGER_IMPLEMENTATION
+#include "logger.h"
+
 
 enum class ArithmeticError { DivisionByZero };
 
@@ -42,4 +45,5 @@ int main() {
         .match<void>(
             [](std::string x) { std::cout << "content: " << x << std::endl; },
             [](NoneT) { std::cout << "No file!\n"; });
+    init_logger(stdout, log_level_t::INFO);
 }
