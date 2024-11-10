@@ -36,7 +36,6 @@ static void log(log_level_t level, const char *fmt, ...);
 #define LOG_WARN(fmt, ...) LOG(log_level_t::WARN, fmt, ##__VA_ARGS__)
 #define LOG_ERROR(fmt, ...) LOG(log_level_t::ERROR, fmt, ##__VA_ARGS__)
 
-
 #ifdef __cplusplus
 }
 #endif
@@ -64,12 +63,13 @@ static void log(log_level_t level, const char *fmt, ...) {
     char timestr[32] = {0};
     assert(strftime(timestr, sizeof(timestr), "%F %H:%M:%S", local) &&
            "Failed to format time string!");
-    char *new_fmt = (char *)malloc(strlen(fmt) + strlen("1970-01-01 00:00:00 ") + 10);
+    char *new_fmt =
+        (char *)malloc(strlen(fmt) + strlen("1970-01-01 00:00:00 ") + 10);
     sprintf(new_fmt, "%s %s %s\n", level_str[level], timestr, fmt);
     if (OUTFILE != NULL) vfprintf(OUTFILE, new_fmt, list);
     if (level >= LEVEL) vfprintf(stdout, new_fmt, list);
     va_end(list);
 }
 
-#endif // LOGGER_IMPLEMENTATION
-#endif // LOGGER_HPP
+#endif  // LOGGER_IMPLEMENTATION
+#endif  // LOGGER_HPP

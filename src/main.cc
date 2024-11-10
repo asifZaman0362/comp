@@ -7,7 +7,6 @@
 #define LOGGER_IMPLEMENTATION
 #include "logger.h"
 
-
 enum class ArithmeticError { DivisionByZero };
 
 Result<float, ArithmeticError> divide(float a, float b) {
